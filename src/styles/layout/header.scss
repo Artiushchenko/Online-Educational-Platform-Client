@@ -1,0 +1,25 @@
+@use '../mixins.scss' as *;
+
+header {
+	padding: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	.logo {
+		@include reset-link-styles;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+
+		> img {
+			width: 70px;
+			height: 70px;
+		}
+
+		> span {
+			font-size: 30px;
+			font-weight: 900;
+		}
+	}
+}

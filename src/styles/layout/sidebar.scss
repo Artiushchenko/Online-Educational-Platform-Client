@@ -1,0 +1,65 @@
+@use '../variables.scss' as *;
+@use '../mixins.scss' as *;
+
+aside {
+	height: 100%;
+	width: 25%;
+	border-right: 3px solid $app-content-container-line;
+
+	.user-info {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+		align-items: center;
+		padding: 20px;
+		border-bottom: 3px solid $app-content-container-line;
+
+		.user-pagination {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		> img {
+			width: 200px;
+			height: 200px;
+		}
+
+		.username {
+			font-size: 18px;
+		}
+
+		.user-role {
+			font-size: 14px;
+		}
+	}
+
+	ul {
+		width: 100%;
+		padding: 20px 0;
+
+		> li {
+			padding: 5px 20px;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			list-style-type: none;
+			margin-bottom: 5px;
+			transition: 0.3s background-color ease-in-out;
+
+			> a {
+				@include reset-link-styles;
+			}
+
+			&:hover {
+				background-color: rgb(70, 70, 70);
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
