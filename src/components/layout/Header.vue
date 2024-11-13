@@ -1,9 +1,9 @@
 <template>
 	<header>
-		<a href="/" class="logo">
+		<router-link to="/courses" class="logo">
 			<img src="/logo.png" alt="OEP Logo" />
 			<span>OEP</span>
-		</a>
+		</router-link>
 
 		<span>Unlock your potential, one lesson at a time!</span>
 	</header>

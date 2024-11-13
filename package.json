@@ -13,9 +13,13 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.4",
+    "axios": "^1.7.7",
     "oh-vue-icons": "^1.0.0-rc3",
+    "pinia": "^2.2.6",
+    "pusher-js": "^8.4.0-rc2",
     "sass": "^1.80.6",
     "vite": "^5.4.10",
+    "vue-router": "^4.4.5",
     "vue-toastification": "^2.0.0-rc.5"
   }
 }

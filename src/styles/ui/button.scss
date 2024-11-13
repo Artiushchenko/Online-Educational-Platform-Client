@@ -1,0 +1,21 @@
+@use '../variables.scss' as *;
+
+button {
+	cursor: pointer;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 20px;
+	font-weight: 600;
+	background-color: $blue;
+	color: $white;
+	transition: 0.3s ease-in-out;
+
+	&:hover {
+		background-color: $dark-blue-accent;
+	}
+
+	&:disabled {
+		cursor: not-allowed;
+		background-color: $light-blue-accent;
+	}
+}

@@ -1,12 +1,19 @@
 <template>
-	<aside>
+	<aside v-if="isAuthenticated">
 		<div class="user-info">
 			<div class="user-pagination">
-				<a href="/settings">
-					<v-icon name="ri-settings-5-line" scale="1.2" fill="#646464" />
-				</a>
+				<router-link to="/settings">
+					<v-icon
+						name="ri-settings-5-line"
+						scale="1.2"
+						fill="#646464"
+						animation="spin"
+						speed="fast"
+						hover
+					/>
+				</router-link>
 
-				<a href="/logout">
+				<a @click.prevent="handleLogout" href="#">
 					<v-icon name="gi-exit-door" scale="1.2" fill="#646464" />
 				</a>
 			</div>
@@ -20,33 +27,62 @@
 
 		<nav>
 			<ul>
-				<li>
+				<li v-if="!isAuthenticated">
 					<v-icon name="gi-entry-door" scale="1.2" fill="#646464" />
-					<a href="/login">Log In</a>
+					<router-link to="/login">Log In</router-link>
 				</li>
 
-				<li>
+				<li v-if="isAuthenticated">
 					<v-icon name="io-home" scale="1.2" fill="#646464" />
-					<a href="/cabinet">Cabinet</a>
+					<router-link to="/cabinet">Cabinet</router-link>
 				</li>
 
-				<li>
+				<li v-if="isAuthenticated">
 					<v-icon name="bi-camera-video" scale="1.2" fill="#646464" />
-					<a href="/courses">Courses</a>
+					<router-link to="/courses">Courses</router-link>
 				</li>
 
-				<li>
+				<li v-if="isAuthenticated">
 					<v-icon name="bi-chat-dots" scale="1.2" fill="#646464" />
-					<a href="/messenger">Messenger</a>
+					<router-link to="/chat">Chat</router-link>
 				</li>
 
-				<li>
+				<li v-if="isAuthenticated">
 					<v-icon name="md-forum-outlined" scale="1.2" fill="#646464" />
-					<a href="/forum">Forum</a>
+					<router-link to="/forum">Forum</router-link>
 				</li>
 			</ul>
 		</nav>
 	</aside>
 </template>
+
+<script setup>
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+import api from '../../config/api.config'
+import { useToastNotification } from '../../mixins/toast.mixin'
+import { useAuthStore } from '../../store/auth.store'
+
+const router = useRouter()
+const { showSuccessToast, showErrorToast } = useToastNotification()
+const authStore = useAuthStore()
+
+const isAuthenticated = computed(() => authStore.isAuthenticated)
+
+const handleLogout = () => {
+	api
+		.post('/logout')
+		.then(() => {
+			authStore.logout()
+			showSuccessToast('Logout successfully')
+			router.push('/login')
+		})
+		.catch(error => {
+			const errorMessage =
+				error.response?.data?.message || 'Logout failed. Please try again.'
+			showErrorToast(errorMessage)
+		})
+}
+</script>
 
 <style src="../../styles/layout/sidebar.scss" scoped lang="scss" />
