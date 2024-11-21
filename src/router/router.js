@@ -23,19 +23,27 @@ const routes = [
 	{
 		path: '/cabinet',
 		name: 'cabinet',
+		component: () => import('../components/screens/cabinet/Cabinet.vue'),
 	},
 	{
 		path: '/courses',
 		name: 'courses',
+		component: () => import('../components/screens/courses/Courses.vue'),
+	},
+	{
+		path: '/courses/:slug',
+		name: 'course_page',
+		component: () => import('../components/screens/courses/Course.vue'),
+	},
+	{
+		path: '/courses/:slug/lectures/:lectureId',
+		name: 'lecture_page',
+		component: () => import('../components/screens/lectures/Lecture.vue'),
 	},
 	{
 		path: '/chat',
 		name: 'chat',
-		component: () => import('../components/screens/chat/Chat.vue'),
-	},
-	{
-		path: '/forum',
-		name: 'forum',
+		component: () => import('../components/screens/chat/Container.vue'),
 	},
 ]
 

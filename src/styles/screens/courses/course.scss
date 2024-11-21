@@ -1,0 +1,38 @@
+@use '../../variables.scss' as *;
+
+.course-page {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+
+	> a {
+		text-decoration: none;
+	}
+
+	h1 {
+		text-transform: uppercase;
+		font-size: 24px;
+	}
+
+	.course-lectures-container {
+		display: flex;
+		justify-content: center;
+
+		.course-lectures {
+			width: max-content;
+			padding: 10px;
+			border: 2px solid $white;
+			border-radius: 12px;
+
+			> ul > li {
+				list-style-type: none;
+
+				> a {
+					text-decoration: none;
+				}
+			}
+		}
+	}
+}

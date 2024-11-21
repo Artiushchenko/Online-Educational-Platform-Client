@@ -1,0 +1,7 @@
+.messages {
+	display: flex;
+	flex-direction: column-reverse;
+	justify-content: start;
+	max-height: 87%;
+	overflow-y: scroll;
+}

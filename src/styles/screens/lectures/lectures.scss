@@ -1,0 +1,15 @@
+@use '../../variables.scss' as *;
+
+.lecture-page {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+
+	h1 {
+		text-transform: uppercase;
+		font-size: 24px;
+	}
+}

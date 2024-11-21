@@ -1,0 +1,61 @@
+@use '../../variables.scss' as *;
+
+.courses {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+
+	.courses-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 20px;
+
+		.courses-item {
+			position: relative;
+			padding: 20px;
+			border-radius: 12px;
+			text-decoration: none;
+			transition: 0.3s ease-in-out;
+			overflow: hidden;
+			z-index: 1;
+
+			h2 {
+				font-size: 16px;
+				text-align: center;
+			}
+
+			p {
+				font-size: 12px;
+			}
+
+			&::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: linear-gradient(45deg, #6a8caf, #2f4f7f, #3a6e8f, #00a1ff);
+				background-size: 400% 400%;
+				z-index: -1;
+				border-radius: 12px;
+				animation: gradient-border 6s ease infinite;
+				transition: background-color 0.7s ease-in-out;
+			}
+		}
+	}
+}
+
+@keyframes gradient-border {
+	0% {
+		background-position: 400% 0%;
+	}
+	50% {
+		background-position: 100% 100%;
+	}
+	100% {
+		background-position: 400% 0%;
+	}
+}

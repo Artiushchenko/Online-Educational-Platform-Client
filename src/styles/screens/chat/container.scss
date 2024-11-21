@@ -1,0 +1,16 @@
+.chat-container {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	height: 100%;
+	width: 100%;
+
+	.chat-header {
+		display: flex;
+		justify-content: end;
+	}
+
+	.chat-area {
+		height: 100%;
+	}
+}

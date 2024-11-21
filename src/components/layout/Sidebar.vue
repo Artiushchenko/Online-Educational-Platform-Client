@@ -2,7 +2,7 @@
 	<aside v-if="isAuthenticated">
 		<div class="user-info">
 			<div class="user-pagination">
-				<router-link to="/settings">
+				<a href="/settings">
 					<v-icon
 						name="ri-settings-5-line"
 						scale="1.2"
@@ -11,7 +11,7 @@
 						speed="fast"
 						hover
 					/>
-				</router-link>
+				</a>
 
 				<a @click.prevent="handleLogout" href="#">
 					<v-icon name="gi-exit-door" scale="1.2" fill="#646464" />
@@ -20,7 +20,7 @@
 
 			<img src="/test-avatar.png" alt="User Avatar" />
 
-			<span class="username">IDENTITY x UNDEFINED</span>
+			<span class="username">{{ username }}</span>
 
 			<span class="user-role">Administrator</span>
 		</div>
@@ -29,27 +29,22 @@
 			<ul>
 				<li v-if="!isAuthenticated">
 					<v-icon name="gi-entry-door" scale="1.2" fill="#646464" />
-					<router-link to="/login">Log In</router-link>
+					<a href="/login">Log In</a>
 				</li>
 
 				<li v-if="isAuthenticated">
 					<v-icon name="io-home" scale="1.2" fill="#646464" />
-					<router-link to="/cabinet">Cabinet</router-link>
+					<a href="/cabinet">Cabinet</a>
 				</li>
 
 				<li v-if="isAuthenticated">
 					<v-icon name="bi-camera-video" scale="1.2" fill="#646464" />
-					<router-link to="/courses">Courses</router-link>
+					<a href="/courses">Courses</a>
 				</li>
 
 				<li v-if="isAuthenticated">
 					<v-icon name="bi-chat-dots" scale="1.2" fill="#646464" />
-					<router-link to="/chat">Chat</router-link>
-				</li>
-
-				<li v-if="isAuthenticated">
-					<v-icon name="md-forum-outlined" scale="1.2" fill="#646464" />
-					<router-link to="/forum">Forum</router-link>
+					<a href="/chat">Chat</a>
 				</li>
 			</ul>
 		</nav>
@@ -57,32 +52,45 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import api from '../../config/api.config'
 import { useToastNotification } from '../../mixins/toast.mixin'
+import { AuthService } from '../../services/auth.service'
+import { UserService } from '../../services/user.service'
 import { useAuthStore } from '../../store/auth.store'
 
 const router = useRouter()
 const { showSuccessToast, showErrorToast } = useToastNotification()
 const authStore = useAuthStore()
+const username = ref('')
 
 const isAuthenticated = computed(() => authStore.isAuthenticated)
 
-const handleLogout = () => {
-	api
-		.post('/logout')
-		.then(() => {
-			authStore.logout()
-			showSuccessToast('Logout successfully')
-			router.push('/login')
-		})
-		.catch(error => {
-			const errorMessage =
-				error.response?.data?.message || 'Logout failed. Please try again.'
-			showErrorToast(errorMessage)
-		})
+const handleLogout = async () => {
+	try {
+		await AuthService.logout()
+		authStore.logout()
+		showSuccessToast('Logout successfully')
+		router.push('/login')
+	} catch (error) {
+		const errorMessage =
+			error.response?.data?.message || 'Logout failed. Please try again.'
+		showErrorToast(errorMessage)
+	}
 }
+
+const getUserName = async () => {
+	try {
+		const data = await UserService.getUser()
+		username.value = data.username
+	} catch (error) {
+		console.error(error)
+	}
+}
+
+onMounted(() => {
+	getUserName()
+})
 </script>
 
 <style src="../../styles/layout/sidebar.scss" scoped lang="scss" />

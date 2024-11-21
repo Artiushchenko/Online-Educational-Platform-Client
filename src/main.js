@@ -12,13 +12,13 @@ import { toastConfig } from './config/toast.config'
 
 import { OhVueIcon, addIcons } from 'oh-vue-icons'
 import {
+	BiArrowLeft,
 	BiCameraVideo,
 	BiChatDots,
 	GiEntryDoor,
 	GiExitDoor,
 	IoHome,
-	MdForumOutlined,
-	RiSettings5Line,
+	RiSettings5Line
 } from 'oh-vue-icons/icons'
 
 addIcons(
@@ -27,8 +27,8 @@ addIcons(
 	GiEntryDoor,
 	GiExitDoor,
 	BiChatDots,
-	MdForumOutlined,
-	BiCameraVideo
+	BiCameraVideo,
+	BiArrowLeft
 )
 
 const app = createApp(App)

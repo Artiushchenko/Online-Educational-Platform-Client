@@ -1,0 +1,79 @@
+<template>
+	<section class="chat-container">
+		<div class="chat-header">
+			<ChatRoomSelection
+				v-if="currentRoom.id"
+				:rooms="chatRooms"
+				:currentRoom="currentRoom"
+				v-on:roomchanged="setRoom($event)"
+			/>
+		</div>
+		<div class="chat-area">
+			<MessageContainer :messages="messages" />
+			<InputMessage :room="currentRoom" v-on:messagesent="getMessages()" />
+		</div>
+	</section>
+</template>
+
+<script setup>
+import { onMounted, ref, watch } from 'vue'
+import { ChatService } from '../../../services/chat.service'
+import ChatRoomSelection from './ChatRoomSelection.vue'
+import InputMessage from './InputMessage.vue'
+import MessageContainer from './MessageContainer.vue'
+
+const chatRooms = ref([])
+const currentRoom = ref([])
+const messages = ref([])
+
+const setRoom = room => {
+	currentRoom.value = room
+}
+
+const getRooms = async () => {
+	try {
+		chatRooms.value = await ChatService.getRooms()
+		setRoom(chatRooms.value[0])
+	} catch (error) {
+		console.error(error)
+	}
+}
+
+const getMessages = async () => {
+	try {
+		messages.value = await ChatService.getMessages(currentRoom.value.id)
+	} catch (error) {
+		console.error(error)
+	}
+}
+
+const connect = () => {
+	if (currentRoom.value.id) {
+		getMessages()
+		window.Echo.private('chat.' + currentRoom.value.id).listen(
+			'.message.new',
+			() => {
+				getMessages()
+			}
+		)
+	}
+}
+
+const disconnect = room => {
+	window.Echo.leave('chat.' + room.id)
+}
+
+watch(currentRoom, (value, oldValue) => {
+	if (oldValue.id) {
+		disconnect(oldValue)
+	}
+
+	connect()
+})
+
+onMounted(() => {
+	getRooms()
+})
+</script>
+
+<style src="../../../styles/screens/chat/container.scss" scoped lang="scss" />

@@ -10,7 +10,7 @@
 
 		<span>
 			Don't have an account yet?
-			<router-link to="/register">Register</router-link>
+			<a href="/register">Register</a>
 		</span>
 	</section>
 </template>
@@ -18,9 +18,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import api from '../../../config/api.config.js'
-import $axios from '../../../config/axios.config.js'
 import { useToastNotification } from '../../../mixins/toast.mixin.js'
+import { AuthService } from '../../../services/auth.service.js'
 import { useAuthStore } from '../../../store/auth.store.js'
 import Button from '../../ui/button/Button.vue'
 
@@ -30,24 +29,17 @@ const router = useRouter()
 const { showSuccessToast, showErrorToast } = useToastNotification()
 const authStore = useAuthStore()
 
-const login = () => {
-	$axios.get('/sanctum/csrf-cookie').then(response => {
-		api
-			.post('/login', {
-				email: email.value,
-				password: password.value,
-			})
-			.then(response => {
-				authStore.login(response.config.headers['X-XSRF-TOKEN'])
-				showSuccessToast('Login successfully')
-				router.push('/courses')
-			})
-			.catch(error => {
-				const errorMessage =
-					error.response?.data?.message || 'Login failed. Please try again.'
-				showErrorToast(errorMessage)
-			})
-	})
+const login = async () => {
+	try {
+		const response = await AuthService.login(email.value, password.value)
+		authStore.login(response.config.headers['X-XSRF-TOKEN'])
+		showSuccessToast('Login successfully')
+		router.push('/courses')
+	} catch (error) {
+		const errorMessage =
+			error.response?.data?.message || 'Login failed. Please try again.'
+		showErrorToast(errorMessage)
+	}
 }
 </script>
 
