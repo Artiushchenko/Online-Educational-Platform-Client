@@ -15,7 +15,7 @@
 				width="800"
 				height="450"
 			></iframe>
-			<p>{{ lecture.content }}</p>
+			<div v-html="lecture.content"></div>
 		</div>
 	</section>
 </template>
