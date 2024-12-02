@@ -1,7 +1,7 @@
 import axios from 'axios'
 import getTokenFromCookies from '../utils/cookie.util'
 
-const token = getTokenFromCookies('XSRF-TOKEN')
+const token = getTokenFromCookies()
 
 const $axios = axios.create({
 	baseURL: 'http://localhost:8080',

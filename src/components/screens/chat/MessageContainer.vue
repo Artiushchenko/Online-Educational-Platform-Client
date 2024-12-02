@@ -7,9 +7,17 @@
 </template>
 
 <script setup>
+import { watch } from 'vue'
 import MessageItem from './MessageItem.vue'
 
 const props = defineProps(['messages'])
+
+watch(
+	() => props.messages,
+	newMessages => {
+		console.log('Updated messages in MessageContainer:', newMessages)
+	}
+)
 </script>
 
 <style

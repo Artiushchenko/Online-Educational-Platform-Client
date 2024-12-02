@@ -1,4 +1,4 @@
-export default function getTokenFromCookies(name) {
+export default function getTokenFromCookies(name = 'XSRF-TOKEN') {
 	const value = `; ${document.cookie}`
 	const parts = value.split(`; ${name}=`)
 

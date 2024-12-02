@@ -1,8 +1,12 @@
 import api from '../config/api.config'
 
 export const CourseService = {
-	async getCourses() {
-		const response = await api.get('/courses')
+	async getCourses(categoryIds = []) {
+		const params = categoryIds.length
+			? { category_ids: categoryIds.join(',') }
+			: {}
+
+		const response = await api.get('/courses', { params })
 
 		return response.data
 	},

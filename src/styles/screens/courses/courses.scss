@@ -7,6 +7,16 @@
 	flex-direction: column;
 	gap: 30px;
 
+	.courses-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		.filters {
+			width: 25%;
+		}
+	}
+
 	.courses-list {
 		display: flex;
 		flex-wrap: wrap;

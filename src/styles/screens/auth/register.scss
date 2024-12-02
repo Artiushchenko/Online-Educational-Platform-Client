@@ -1,4 +1,5 @@
 @use '../../mixins.scss' as *;
+@use '../../variables.scss' as *;
 
 section {
 	display: flex;
@@ -17,21 +18,28 @@ section {
 		flex-direction: column;
 		gap: 10px;
 
-		> input {
-			background-color: transparent;
-			padding: 10px;
-			border: 2px solid #fff;
-		}
+		.form-group {
+			display: flex;
+			flex-direction: column;
+			gap: 3px;
 
-		> button {
-			cursor: pointer;
-			background-color: blue;
-			border: none;
-			padding: 10px 0;
-			transition: 0.3s background-color ease-in-out;
+			> input {
+				background-color: transparent;
+				padding: 10px;
+				border: 2px solid $white;
 
-			&:hover {
-				background-color: darkblue;
+				&:focus {
+					outline: none;
+				}
+			}
+
+			.is-invalid {
+				border-color: $red;
+			}
+
+			.error {
+				color: $red;
+				font-size: 12px;
 			}
 		}
 	}

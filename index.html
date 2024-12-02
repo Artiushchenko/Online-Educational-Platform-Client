@@ -3,8 +3,19 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="csrf-token"
+			content="{{
+			getTokenFromCookies()
+		}}"
+		/>
 		<link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
 		<title>Online Educational Platform</title>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/css/multi-select-tag.css"
+		/>
+		<script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/js/multi-select-tag.js"></script>
 	</head>
 	<body>
 		<div id="app"></div>

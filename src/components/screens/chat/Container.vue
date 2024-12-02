@@ -10,7 +10,7 @@
 		</div>
 		<div class="chat-area">
 			<MessageContainer :messages="messages" />
-			<InputMessage :room="currentRoom" v-on:messagesent="getMessages()" />
+			<InputMessage :room="currentRoom" v-on:messagesent="getMessages" />
 		</div>
 	</section>
 </template>
@@ -18,6 +18,7 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue'
 import { ChatService } from '../../../services/chat.service'
+import { initializeEcho } from '../../../services/echo.service'
 import ChatRoomSelection from './ChatRoomSelection.vue'
 import InputMessage from './InputMessage.vue'
 import MessageContainer from './MessageContainer.vue'
@@ -48,14 +49,18 @@ const getMessages = async () => {
 }
 
 const connect = () => {
+	console.log('connect called for room:', currentRoom.value.id)
+
 	if (currentRoom.value.id) {
 		getMessages()
-		window.Echo.private('chat.' + currentRoom.value.id).listen(
-			'.message.new',
-			() => {
-				getMessages()
-			}
-		)
+		window.Echo.private('chat.' + currentRoom.value.id)
+			.listen('.message.new', payload => {
+				console.log('Received message:', payload)
+				messages.value = [...messages.value, payload.message]
+			})
+			.error(error => {
+				console.error('Error in Echo connection:', error)
+			})
 	}
 }
 
@@ -72,6 +77,7 @@ watch(currentRoom, (value, oldValue) => {
 })
 
 onMounted(() => {
+	initializeEcho()
 	getRooms()
 })
 </script>

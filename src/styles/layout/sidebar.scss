@@ -50,6 +50,7 @@ aside {
 
 			> a {
 				@include reset-link-styles;
+				width: 100%;
 			}
 
 			&:hover {

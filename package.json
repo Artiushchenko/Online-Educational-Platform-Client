@@ -13,7 +13,10 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.4",
+    "@vuelidate/core": "^2.0.3",
+    "@vuelidate/validators": "^2.0.4",
     "axios": "^1.7.7",
+    "laravel-echo": "^1.17.1",
     "oh-vue-icons": "^1.0.0-rc3",
     "pinia": "^2.2.6",
     "pusher-js": "^8.4.0-rc2",

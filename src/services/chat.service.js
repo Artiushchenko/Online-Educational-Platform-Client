@@ -16,6 +16,6 @@ export const ChatService = {
 	async sendMessage(roomId, message) {
 		const response = await api.post(`/chat/room/${roomId}/message`, { message })
 
-		return response.data
+		return response
 	},
 }

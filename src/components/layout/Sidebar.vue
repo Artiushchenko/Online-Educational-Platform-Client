@@ -20,18 +20,13 @@
 
 			<img src="/test-avatar.png" alt="User Avatar" />
 
-			<span class="username">{{ username }}</span>
+			<span class="username">{{ userName }}</span>
 
-			<span class="user-role">Administrator</span>
+			<span class="user-role">{{ userRole }}</span>
 		</div>
 
 		<nav>
 			<ul>
-				<li v-if="!isAuthenticated">
-					<v-icon name="gi-entry-door" scale="1.2" fill="#646464" />
-					<a href="/login">Log In</a>
-				</li>
-
 				<li v-if="isAuthenticated">
 					<v-icon name="io-home" scale="1.2" fill="#646464" />
 					<a href="/cabinet">Cabinet</a>
@@ -62,7 +57,8 @@ import { useAuthStore } from '../../store/auth.store'
 const router = useRouter()
 const { showSuccessToast, showErrorToast } = useToastNotification()
 const authStore = useAuthStore()
-const username = ref('')
+const userName = ref('')
+const userRole = ref('')
 
 const isAuthenticated = computed(() => authStore.isAuthenticated)
 
@@ -79,17 +75,18 @@ const handleLogout = async () => {
 	}
 }
 
-const getUserName = async () => {
+const getUserData = async () => {
 	try {
 		const data = await UserService.getUser()
-		username.value = data.username
+		userName.value = data.user_name
+		userRole.value = data.user_role
 	} catch (error) {
 		console.error(error)
 	}
 }
 
 onMounted(() => {
-	getUserName()
+	getUserData()
 })
 </script>
 

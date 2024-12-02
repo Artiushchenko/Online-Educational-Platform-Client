@@ -13,4 +13,8 @@ export const LectureService = {
 
 		return response.data
 	},
+
+	async markLectureAsViewed(courseSlug, lectureId) {
+		await api.post(`/courses/${courseSlug}/lectures/${lectureId}/complete`)
+	},
 }

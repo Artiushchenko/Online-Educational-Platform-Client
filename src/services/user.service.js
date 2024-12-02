@@ -6,4 +6,10 @@ export const UserService = {
 
 		return response.data
 	},
+
+	async getStatistics() {
+		const response = await api.get('/statistics')
+
+		return response.data
+	},
 }

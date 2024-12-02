@@ -39,8 +39,17 @@ const getLecture = async () => {
 	}
 }
 
+const markLectureAsViewed = async () => {
+	try {
+		await LectureService.markLectureAsViewed(courseSlug, lectureId)
+	} catch (error) {
+		console.error(error)
+	}
+}
+
 onMounted(() => {
 	getLecture()
+	setTimeout(markLectureAsViewed, 300000)
 })
 </script>
 

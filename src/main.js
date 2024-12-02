@@ -15,16 +15,26 @@ import {
 	BiArrowLeft,
 	BiCameraVideo,
 	BiChatDots,
-	GiEntryDoor,
 	GiExitDoor,
 	IoHome,
-	RiSettings5Line
+	RiSettings5Line,
 } from 'oh-vue-icons/icons'
+
+import getTokenFromCookies from './utils/cookie.util'
+
+const csrfToken = getTokenFromCookies()
+
+if (csrfToken) {
+	const meta = document.querySelector('meta[name="csrf-token"]')
+
+	if (meta) {
+		meta.setAttribute('content', csrfToken)
+	}
+}
 
 addIcons(
 	RiSettings5Line,
 	IoHome,
-	GiEntryDoor,
 	GiExitDoor,
 	BiChatDots,
 	BiCameraVideo,

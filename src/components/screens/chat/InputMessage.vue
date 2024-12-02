@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { defineEmits, defineProps, ref } from 'vue'
 import { ChatService } from '../../../services/chat.service'
 
 const props = defineProps(['room'])
@@ -19,7 +19,7 @@ const emit = defineEmits(['messagesent'])
 const message = ref('')
 
 const pushMessage = async () => {
-	if (message === '') {
+	if (message.value.trim() === '') {
 		return
 	}
 
