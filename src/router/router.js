@@ -17,8 +17,9 @@ const routes = [
 		component: () => import('../components/screens/not-found/NotFound.vue'),
 	},
 	{
-		path: '/settings',
-		name: 'settings',
+		path: '/',
+		name: 'home',
+		component: () => import('../components/screens/home/Home.vue'),
 	},
 	{
 		path: '/cabinet',

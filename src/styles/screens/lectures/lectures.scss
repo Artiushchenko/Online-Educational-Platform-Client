@@ -12,4 +12,60 @@
 		text-transform: uppercase;
 		font-size: 24px;
 	}
+
+	.lecture-content {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+
+		.lecture-content-text {
+			padding: 20px;
+			border-radius: 12px;
+			background-color: $app-background;
+		}
+
+		.lecture-files {
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+			padding: 20px;
+			border-radius: 12px;
+			background-color: $app-background;
+
+			p {
+				text-transform: uppercase;
+				font-size: 20px;
+				font-weight: 700;
+			}
+
+			tr,
+			th,
+			td {
+				padding: 5px 0;
+				border: 2px solid $app-content-container-line;
+				text-align: center;
+				font-size: 14px;
+			}
+
+			td > button {
+				cursor: pointer;
+				padding: 0 10px;
+				border: none;
+				border-radius: 20px;
+				font-weight: 600;
+				background-color: $blue;
+				color: $white;
+				transition: 0.3s ease-in-out;
+
+				&:hover {
+					background-color: $dark-blue-accent;
+				}
+
+				&:disabled {
+					cursor: not-allowed;
+					background-color: $light-blue-accent;
+				}
+			}
+		}
+	}
 }

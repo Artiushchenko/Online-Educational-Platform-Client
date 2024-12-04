@@ -1,8 +1,6 @@
 <template>
 	<section class="course-page">
-		<router-link to="/courses">
-			<v-icon name="bi-arrow-left" scale="1.2" fill="#646464" />
-		</router-link>
+		<router-link to="/courses">Back</router-link>
 
 		<h1 v-if="course">{{ course.title }}</h1>
 

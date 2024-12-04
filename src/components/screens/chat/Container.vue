@@ -49,18 +49,14 @@ const getMessages = async () => {
 }
 
 const connect = () => {
-	console.log('connect called for room:', currentRoom.value.id)
-
 	if (currentRoom.value.id) {
 		getMessages()
-		window.Echo.private('chat.' + currentRoom.value.id)
-			.listen('.message.new', payload => {
-				console.log('Received message:', payload)
+		window.Echo.private('chat.' + currentRoom.value.id).listen(
+			'.message.new',
+			payload => {
 				messages.value = [...messages.value, payload.message]
-			})
-			.error(error => {
-				console.error('Error in Echo connection:', error)
-			})
+			}
+		)
 	}
 }
 

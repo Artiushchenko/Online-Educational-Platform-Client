@@ -1,8 +1,8 @@
 import api from '../config/api.config'
 
 export const UserService = {
-	async getUser() {
-		const response = await api.get('/cabinet')
+	async getUserName() {
+		const response = await api.get('/home')
 
 		return response.data
 	},
