@@ -1,7 +1,7 @@
 import api from '../config/api.config'
 
 export const CourseService = {
-	async getCourses(categoryIds = []) {
+	async getCourses(categoryIds = [], search = '') {
 		const params = categoryIds.length
 			? { category_ids: categoryIds.join(',') }
 			: {}

@@ -5,8 +5,15 @@
 			<span>OEP</span>
 		</a>
 
-		<span>Unlock your potential, one lesson at a time!</span>
+		<div>
+			<Search />
+			<span>Unlock your potential, one lesson at a time!</span>
+		</div>
 	</header>
 </template>
+
+<script setup>
+import Search from '../ui/search/Search.vue'
+</script>
 
 <style src="../../styles/layout/header.scss" scoped lang="scss" />

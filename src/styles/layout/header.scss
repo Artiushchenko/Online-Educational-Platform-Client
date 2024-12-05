@@ -22,4 +22,10 @@ header {
 			font-weight: 900;
 		}
 	}
+
+	> div {
+		display: flex;
+		align-items: center;
+		gap: 30px;
+	}
 }
