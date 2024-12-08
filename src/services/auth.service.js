@@ -1,11 +1,10 @@
-import api from '../config/api.config'
-import $axios from '../config/axios.config'
+import { $axios, $axiosAPI } from '../config/axios.config'
 
 export const AuthService = {
 	login(email, password) {
 		$axios.get('/sanctum/csrf-cookie')
 
-		return api.post('/login', {
+		return $axiosAPI.post('/login', {
 			email,
 			password,
 		})
@@ -14,7 +13,7 @@ export const AuthService = {
 	register(name, email, password, password_confirmation) {
 		$axios.get('/sanctum/csrf-cookie')
 
-		return api.post('/register', {
+		return $axiosAPI.post('/register', {
 			name,
 			email,
 			password,
@@ -23,6 +22,6 @@ export const AuthService = {
 	},
 
 	logout() {
-		return api.post('/logout')
+		return $axiosAPI.post('/logout')
 	},
 }

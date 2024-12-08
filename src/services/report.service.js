@@ -1,15 +1,14 @@
-import api from '../config/api.config'
-import api_image from '../config/api_image'
+import { $axiosAPI, $axiosBlob } from '../config/axios.config'
 
 export const ReportService = {
 	async generateReport() {
-		const response = await api.post('/report/generate')
+		const response = await $axiosAPI.post('/report/generate')
 
 		return response.data
 	},
 
 	async downloadReport(fileName) {
-		const response = await api_image.get(`/report/download/${fileName}`)
+		const response = await $axiosBlob.get(`/report/download/${fileName}`)
 
 		return response.data
 	},

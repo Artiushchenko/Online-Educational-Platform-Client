@@ -1,10 +1,9 @@
-import api from '../config/api.config'
-import api_image from '../config/api_image'
+import { $axiosAPI, $axiosBlob } from '../config/axios.config'
 import { generateEmbedUrl } from '../utils/embed_url.util'
 
 export const LectureService = {
 	async getLecture(courseSlug, lectureId) {
-		const response = await api.get(
+		const response = await $axiosAPI.get(
 			`/courses/${courseSlug}/lectures/${lectureId}`
 		)
 
@@ -16,7 +15,7 @@ export const LectureService = {
 	},
 
 	async downloadLectureFile(courseSlug, lectureId, file) {
-		const response = await api_image.get(
+		const response = await $axiosBlob.get(
 			`/courses/${courseSlug}/lectures/${lectureId}/files/${file.id}/download`
 		)
 
@@ -24,6 +23,8 @@ export const LectureService = {
 	},
 
 	async markLectureAsViewed(courseSlug, lectureId) {
-		await api.post(`/courses/${courseSlug}/lectures/${lectureId}/complete`)
+		await $axiosAPI.post(
+			`/courses/${courseSlug}/lectures/${lectureId}/complete`
+		)
 	},
 }

@@ -1,20 +1,22 @@
-import api from '../config/api.config'
+import { $axiosAPI } from '../config/axios.config'
 
 export const ChatService = {
 	async getRooms() {
-		const response = await api.get('/chat/rooms')
+		const response = await $axiosAPI.get('/chat/rooms')
 
 		return response.data
 	},
 
 	async getMessages(roomId) {
-		const response = await api.get(`/chat/room/${roomId}/messages`)
+		const response = await $axiosAPI.get(`/chat/room/${roomId}/messages`)
 
 		return response.data
 	},
 
 	async sendMessage(roomId, message) {
-		const response = await api.post(`/chat/room/${roomId}/message`, { message })
+		const response = await $axiosAPI.post(`/chat/room/${roomId}/message`, {
+			message,
+		})
 
 		return response
 	},

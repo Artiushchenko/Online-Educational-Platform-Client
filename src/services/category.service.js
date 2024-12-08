@@ -1,8 +1,8 @@
-import api from '../config/api.config'
+import { $axiosAPI } from '../config/axios.config'
 
 export const CategoryService = {
 	async getCategories() {
-		const response = await api.get('/categories')
+		const response = await $axiosAPI.get('/categories')
 
 		return response.data
 	},
