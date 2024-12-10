@@ -14,9 +14,7 @@ const props = defineProps(['messages'])
 
 watch(
 	() => props.messages,
-	newMessages => {
-		console.log('Updated messages in MessageContainer:', newMessages)
-	}
+	newMessages => {}
 )
 </script>
 

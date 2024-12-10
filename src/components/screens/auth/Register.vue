@@ -129,7 +129,7 @@ const register = async () => {
 		)
 		authStore.register(response.config.headers['X-XSRF-TOKEN'])
 		showSuccessToast('Registration successfully')
-		router.push('/courses')
+		router.push('/')
 	} catch (error) {
 		const errorMessage =
 			error.response?.data?.message || 'Registration failed. Please try again.'

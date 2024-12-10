@@ -83,7 +83,7 @@ const login = async () => {
 		const response = await AuthService.login(email.value, password.value)
 		authStore.login(response.config.headers['X-XSRF-TOKEN'])
 		showSuccessToast('Login successfully')
-		router.push('/courses')
+		router.push('/')
 	} catch (error) {
 		const errorMessage =
 			error.response?.data?.message || 'Login failed. Please try again.'

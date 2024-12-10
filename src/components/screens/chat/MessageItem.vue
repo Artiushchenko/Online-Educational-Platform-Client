@@ -9,4 +9,4 @@ import { defineProps } from 'vue'
 const props = defineProps(['message'])
 </script>
 
-<!-- <style src="../../../styles/screens/chat/messageItem.scss" scoped lang="scss" /> -->
+<style src="../../../styles/screens/chat/messageItem.scss" scoped lang="scss" />

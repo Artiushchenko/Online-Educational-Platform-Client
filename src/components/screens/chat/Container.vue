@@ -10,8 +10,8 @@
 		</div>
 		<div class="chat-area">
 			<MessageContainer :messages="messages" />
-			<InputMessage :room="currentRoom" v-on:messagesent="getMessages" />
 		</div>
+		<InputMessage :room="currentRoom" v-on:messagesent="getMessages" />
 	</section>
 </template>
 
@@ -53,8 +53,8 @@ const connect = () => {
 		getMessages()
 		window.Echo.private('chat.' + currentRoom.value.id).listen(
 			'.message.new',
-			payload => {
-				messages.value = [...messages.value, payload.message]
+			() => {
+				getMessages()
 			}
 		)
 	}
