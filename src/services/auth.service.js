@@ -21,7 +21,7 @@ export const AuthService = {
 		})
 	},
 
-	logout() {
+	async logout() {
 		return $axiosAPI.post('/logout')
 	},
 }

@@ -10,18 +10,6 @@ import './styles/main.scss'
 import VueToastificationPlugin from 'vue-toastification'
 import { toastConfig } from './config/toast.config'
 
-import getTokenFromCookies from './utils/cookie.util'
-
-const csrfToken = getTokenFromCookies()
-
-if (csrfToken) {
-	const meta = document.querySelector('meta[name="csrf-token"]')
-
-	if (meta) {
-		meta.setAttribute('content', csrfToken)
-	}
-}
-
 const app = createApp(App)
 const pinia = createPinia()
 
